@@ -1,5 +1,6 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
+import { SignOutButton } from "../../SignOutButton/SignOutButton";
 
 const DisclosurePanel = ({
   classNameFn,
@@ -19,7 +20,7 @@ const DisclosurePanel = ({
             className={classNameFn(
               item.current
                 ? "bg-gray-900 text-white"
-                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                : "text-black hover:bg-gray-700 hover:text-white",
               "block rounded-lg px-3 py-2 text-base font-medium"
             )}
             aria-current={item.current ? "page" : undefined}
@@ -27,6 +28,7 @@ const DisclosurePanel = ({
             {item.name}
           </Disclosure.Button>
         ))}
+        <SignOutButton></SignOutButton>
       </div>
     </Disclosure.Panel>
   );

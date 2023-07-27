@@ -3,40 +3,25 @@ import Link from "next/link";
 import React from "react";
 import axios, { AxiosError } from "axios";
 import { FormEvent, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-
-export const signIn = async ({ display_name, username, password }: any) => {
-    return await axios.post(`${process.env.BE_API}/users/login`, {
-      username,
-      password,
+function Login() {
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const res = await signIn("credentials", {
+      username: formData.get("username"),
+      password: formData.get("password"),
+      redirect: false,
     });
-  };
 
-const Login = () => {
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        try {
-          const formData = new FormData(event.currentTarget);
-          const signInResponse = await signIn({
-            username: formData.get("username"),
-            password: formData.get("password"),
-          });
-          console.log(signInResponse);
-          // const res = await signIn("credentials", {
-          //   email: signupResponse.data.email,
-          //   password: formData.get("password"),
-          //   redirect: false,
-          // });
-    
-          // if (res?.ok) return router.push("/dashboard/profile");
-        } catch (error) {
-          console.log(error);
-          if (error instanceof AxiosError) {
-            const errorMessage = error.response?.data.message;
-            setError(errorMessage);
-          }
-        }
-      };
+    if (res?.error) setError(res.error as string);
+
+    if (res?.ok) return router.push("/profile");
+  };
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -45,6 +30,11 @@ const Login = () => {
             Sign in to your account
           </h2>
         </div>
+        {error && (
+          <div className="bg-red-600 text-white flex justify-center">
+            {error}
+          </div>
+        )}
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
@@ -113,6 +103,6 @@ const Login = () => {
       </div>
     </>
   );
-};
+}
 
 export default Login;

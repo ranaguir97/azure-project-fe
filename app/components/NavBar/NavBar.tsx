@@ -6,6 +6,8 @@ import DisclosurePanel from "./Disclosure/DisclosurePanel";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Logo from "../Logo/Logo";
+import { SignOutButton } from "../SignOutButton/SignOutButton";
+import { useSession } from "next-auth/react";
 
 export function classNames(...classes: Array<String>) {
   return classes.filter(Boolean).join(" ");
@@ -15,7 +17,9 @@ export interface Navigation {
   href: string;
   current: boolean;
 }
-export default function Example() {
+export default function Navbar() {
+  const {  status } = useSession();
+  console.log(status)
   const pathname = usePathname();
 
   const [navigation, setNavigation] = useState<Navigation[]>([
@@ -49,7 +53,7 @@ export default function Example() {
                 <DisclosureButtom open={open} />
               </div>
               <div className="flex flex-1 items-center justify-center lg:items-stretch lg:justify-start">
-            <Logo></Logo>
+                <Logo></Logo>
                 <div className="hidden lg:ml-6 lg:flex">
                   <NavigationLinks
                     navigation={navigation}
@@ -62,6 +66,9 @@ export default function Example() {
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEylgd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
+              <div className="lg:block hidden">
+          <SignOutButton></SignOutButton>
+              </div>
             </div>
           </div>
           <DisclosurePanel navigation={navigation} classNameFn={classNames} />

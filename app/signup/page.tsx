@@ -2,10 +2,12 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export const SignUp = () => {
   const [error, setError] = useState();
-
+  const router = useRouter();
   const signUp = async ({ display_name, username, password }: any) => {
     return await axios.post(`${process.env.BE_API}/users/signup`, {
       display_name,
@@ -24,13 +26,14 @@ export const SignUp = () => {
         password: formData.get("password"),
       });
       console.log(signupResponse);
-      // const res = await signIn("credentials", {
-      //   email: signupResponse.data.email,
-      //   password: formData.get("password"),
-      //   redirect: false,
-      // });
-
-      // if (res?.ok) return router.push("/dashboard/profile");
+      console.log(signupResponse.data.username, signupResponse.data.password);
+      const res = await signIn("credentials", {
+        username: signupResponse.data.username,
+        password: formData.get("password"),
+        redirect: false,
+      });
+      console.log(res)
+      if (res?.ok) return router.push("/profile");
     } catch (error) {
       console.log("ERROR", error);
       if (error instanceof AxiosError) {
@@ -48,7 +51,11 @@ export const SignUp = () => {
             Sign up
           </h2>
         </div>
-        {error && <div className="bg-red-600 text-white flex justify-center">{error}</div>}
+        {error && (
+          <div className="bg-red-600 text-white flex justify-center">
+            {error}
+          </div>
+        )}
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
