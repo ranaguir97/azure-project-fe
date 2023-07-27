@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export const SignUp = () => {
+const SignUp = () => {
   const [error, setError] = useState();
   const router = useRouter();
   const signUp = async ({ display_name, username, password }: any) => {
