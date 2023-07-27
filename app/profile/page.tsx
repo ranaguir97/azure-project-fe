@@ -1,9 +1,11 @@
-import React from 'react'
+"use client";
+import React from "react";
+import { useSession } from "next-auth/react";
 
 const Profile = () => {
-  return (
-    <div>profile</div>
-  )
-}
+  const { data: session, status } = useSession();
+  console.log(session, status);
+  return <div>profile</div>;
+};
 
-export default Profile
+export default Profile;
