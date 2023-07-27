@@ -16,7 +16,7 @@ WORKDIR /app
 # setting production env usually speeds up install for your package manager
 ENV NODE_ENV production
 # copy the lock file that you use
-COPY pnpm-lock.yaml ./
+# COPY pnpm-lock.yaml ./
 # set the store dir to a folder that is not in the project
 RUN pnpm config set store-dir /workdir/.pnpm-store
 RUN pnpm fetch
