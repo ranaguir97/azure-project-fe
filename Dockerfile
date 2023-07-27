@@ -12,8 +12,6 @@ COPY package-lock.json package-lock.json
 
 USER node
 
-RUN npm install --production
-
 COPY --chown=node:node public public
 
 EXPOSE 3000
