@@ -16,17 +16,17 @@ export interface Navigation {
   name: string;
   href: string;
   current: boolean;
+  auth: boolean;
 }
 export default function Navbar() {
-  const {  status } = useSession();
-  console.log(status)
   const pathname = usePathname();
+  const { status } = useSession();
 
   const [navigation, setNavigation] = useState<Navigation[]>([
-    { name: "Events", href: "/events", current: false },
-    { name: "My Profile", href: "/profile", current: false },
-    { name: "Login", href: "/login", current: false },
-    { name: "Sign Up", href: "/signup", current: false },
+    { name: "Events", href: "/events", current: false, auth: true },
+    { name: "My Profile", href: "/profile", current: false, auth: true },
+    { name: "Login", href: "/login", current: false, auth: false },
+    { name: "Sign Up", href: "/signup", current: false, auth: false },
   ]);
 
   useEffect(() => {
@@ -66,8 +66,10 @@ export default function Navbar() {
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEylgd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
-              <div className="lg:block hidden">
-          <SignOutButton></SignOutButton>
+              <div className={status === "authenticated" ? "block" : "hidden"}>
+                <div className="lg:block hidden">
+                  <SignOutButton></SignOutButton>
+                </div>
               </div>
             </div>
           </div>
