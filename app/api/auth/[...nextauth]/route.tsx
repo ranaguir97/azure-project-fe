@@ -1,7 +1,3 @@
-export default function route() {
-  return (
-    <div>
-      Hola
-    </div>
-  );
+export default async function handler(req, res) {
+  res.status(200).json({name: "Jhon Doe"})
 }
