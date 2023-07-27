@@ -5,7 +5,7 @@ import axios, { AxiosError } from "axios";
 import { FormEvent, useState } from "react";
 
 
-export const signIn = async ({ display_name, username, password }: any) => {
+const signIn = async ({ display_name, username, password }: any) => {
     return await axios.post(`${process.env.BE_API}/users/login`, {
       username,
       password,
@@ -33,7 +33,7 @@ const Login = () => {
           console.log(error);
           if (error instanceof AxiosError) {
             const errorMessage = error.response?.data.message;
-            setError(errorMessage);
+            // setError(errorMessage);
           }
         }
       };

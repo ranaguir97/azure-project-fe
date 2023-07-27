@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
 
-export const SignUp = () => {
+const SignUp = () => {
   const [error, setError] = useState();
 
   const signUp = async ({ display_name, username, password }: any) => {
