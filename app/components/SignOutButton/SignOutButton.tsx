@@ -10,7 +10,7 @@ export const SignOutButton = () => {
       onClick={() => signOut()}
       className={`${
         status === "authenticated" ? "block" : "hidden"
-      } mx-2 bg-transparent hover:bg-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded`}
+      } bg-transparent hover:bg-black font-semibold hover:text-white py-2 px-4 border border-black hover:border-transparent rounded`}
     >
       Sign Out
     </button>

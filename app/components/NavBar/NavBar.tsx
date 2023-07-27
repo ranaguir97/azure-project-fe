@@ -19,8 +19,13 @@ export interface Navigation {
   auth: boolean;
 }
 export default function Navbar() {
+  const { data: session, status } = useSession();
+  const [userData, setuserData] = useState<undefined | any>(undefined);
+  console.log(session, status);
+  useEffect(() => {
+    setuserData(session?.user);
+  }, [session]);
   const pathname = usePathname();
-  const { status } = useSession();
 
   const [navigation, setNavigation] = useState<Navigation[]>([
     { name: "Events", href: "/events", current: false, auth: true },
@@ -61,13 +66,13 @@ export default function Navbar() {
                   />
                 </div>
               </div>
-              <img
-                className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEylgd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
-              <div className={status === "authenticated" ? "block" : "hidden"}>
-                <div className="lg:block hidden">
+              <div
+                className={`${
+                  status === "authenticated" ? "block" : "hidden"
+                } flex flex-row items-center`}
+              >
+                <img className="h-8 w-8 rounded-full" src={userData?.profilePicture||''} alt="" />
+                <div className="lg:block hidden mx-4">
                   <SignOutButton></SignOutButton>
                 </div>
               </div>
