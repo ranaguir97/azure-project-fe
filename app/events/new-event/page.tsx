@@ -5,7 +5,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useRouter } from "next/navigation";
 
-const newEvent = () => {
+const NewEvent = () => {
   const [value, setValue] = useState({
     startDate: null,
     endDate: null,
@@ -104,4 +104,4 @@ const newEvent = () => {
   );
 };
 
-export default newEvent;
+export default NewEvent;
