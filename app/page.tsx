@@ -9,7 +9,7 @@ export default function Home() {
       <div className="absolute top-[20vh]">
         <p className="text-6xl">Bienvenido a</p>
         <h1 className="text-8xl font-extrabold">EVNT TRCKR</h1>
-        <p className="text-6xl">nunca te pierdas un evento</p>
+        <p className="text-6xl">nunca te pierdas un evento.</p>
       </div>
       <Image
       priority
