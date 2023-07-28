@@ -6,7 +6,8 @@ name: Build and deploy container app to Azure Web App - ranaguir97-ttt-app-be
 on:
   push:
     branches:
-      - main
+    # disable workflow
+      - not-main
   workflow_dispatch:
 
 jobs:
