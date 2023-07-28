@@ -6,7 +6,7 @@ import { EventCard } from "../components/eventCard/eventCard";
 const Profile = () => {
   const { data: session, status } = useSession();
   const [userData, setuserData] = useState<undefined | any>(undefined);
-  console.log(session, status);
+  console.log(userData, "useddataa");
   useEffect(() => {
     setuserData(session?.user);
   }, [session]);
@@ -32,11 +32,13 @@ const Profile = () => {
                 return (
                   <EventCard
                     key={index}
+                    eventId={event.id}
                     eventName={event.eventName}
                     eventDescription={event.eventDescription}
                     date={event.date}
                     image={event.img}
                     ownerId={event.ownerId}
+                    size={"sm"}
                   />
                 );
               })}
@@ -47,11 +49,13 @@ const Profile = () => {
                 return (
                   <EventCard
                     key={index}
+                    eventId={event.id}
                     eventName={event.eventName}
                     eventDescription={event.eventDescription}
                     date={event.date}
                     image={event.img}
                     ownerId={event.ownerId}
+                    size={"sm"}
                   />
                 );
               })}
