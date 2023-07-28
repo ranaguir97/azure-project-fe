@@ -3,7 +3,8 @@ name: Deploy to production
 on:
   push:
     branches:
-      - main
+    # disable workflow
+      - not-main
 
 env:
   IMAGE_REGISTRY_URL: ghcr.io
